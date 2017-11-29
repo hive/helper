@@ -140,23 +140,26 @@ class Arr extends \Arrayzy\ArrayImitator
     /**
      * @return static
      */
-    public function encode()
+    public function toEncode()
     {
-
-        return new static(base64_encode(serialize($this->elements)));
+        return base64_encode(serialize($this->elements));
     }
 
 
     /**
      * @return static
      */
-    public function decode()
+    public function createFromEncode($string)
     {
-
-        return new static(unserialize(base64_decode($this->elements)));
+        return new static(unserialize(base64_decode($string)));
     }
 
     // merge
 
+
+    public function __invoke()
+    {
+        return 'tes';
+    }
 
 }
