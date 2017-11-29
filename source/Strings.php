@@ -13,7 +13,6 @@
 class Strings extends \Stringy\Stringy
 {
 
-
     public static function helper($string)
     {
         return self::create($string);

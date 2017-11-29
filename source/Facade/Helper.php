@@ -1,4 +1,4 @@
-<?php namespace Hive\Helper;
+<?php namespace Hive;
 
 /**
  *
@@ -16,7 +16,7 @@ class Helper
 
     public static function strings($string)
     {
-        return Strings::helper($string);
+        return Helper\Strings::helper($string);
     }
 
     /**
@@ -41,11 +41,9 @@ class Helper
         return self::strings($string);
     }
 
-
-
     public static function arrays($array)
     {
-        return Arrays::helper($array);
+        return Helper\Arrays::helper($array);
     }
 
 
