@@ -10,8 +10,15 @@
  *
  * @copyright (c) 2017 Jamie Peake
  */
-class Str extends \Stringy\Stringy
+class Strings extends \Stringy\Stringy
 {
+
+
+    public static function helper($string)
+    {
+        return self::create($string);
+    }
+
 
     /**
      * Limits a phrase to a given number of words. The third argument

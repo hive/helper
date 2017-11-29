@@ -27,7 +27,7 @@
   "autoload": {
     "psr-4": {
       "Hive\\Helper\\": "source",
-      "Hive\\": ["source/Facade/"]
+      "Hive\\": ["source", "facade"]
     }
   },
   "extra": {

@@ -10,8 +10,15 @@
  *
  * @copyright (c) 2017 Jamie Peake
  */
-class Arr extends \Arrayzy\ArrayImitator
+class Arrays extends \Arrayzy\ArrayImitator
 {
+
+    public static function helper($string)
+    {
+        return self::create($string);
+    }
+
+
 
     /**
      * Return a callback array from a string, eg: limit[10,20] would become

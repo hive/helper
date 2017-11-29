@@ -10,7 +10,7 @@
  *
  * @copyright (c) 2017 Jamie Peake
  */
-class Num
+class Number
 {
 
     /**
