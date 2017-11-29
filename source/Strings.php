@@ -13,14 +13,28 @@
 class Strings extends \Stringy\Stringy
 {
 
-    private $config = [
-        'censor.badwords' => '',
-        'truncate.substring' => '',
-        'random.type' => 'distinct',
+    protected $config = [
+        'censor' => [
+            'badwords' => ['trump'],
+            'replacement' => '####'
+        ],
+        'truncate' => [
+            'substring' => ''
+        ],
+        'random' => [
+            'patterns' => [
+                'upper'     => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+                'lower'     => 'abcdefghijklmnopqrstuvwxyz',
+                'numeric'   => '0123456789',
+                'hex'       => '0123456789abcdef',
+                'distinct'  =>  '2345679abdeghqrtACDEFHJKLMNPRSTUVWXYZ',
+                'symbol'    =>  '!@#$%^&*()[]{};:,.<>/?|=+-_`~'
+            ]
+        ]
     ];
 
 
-    public static function helper($string, $config = [])
+    public static function helper($string)
     {
         return self::create($string);
     }
@@ -60,33 +74,29 @@ class Strings extends \Stringy\Stringy
      * Generates a random string of a given type and length.
      *
      * @param int    $length
-     * @param string $type
+     * @param array $patterns
      * @return static Object with its $str being random
-     * @todo move patterns to config
      */
-    public function random($length = 8, $type = 'distinct')
+    public function random($length = 8, $patterns = ['distinct'])
     {
         $pool = '';
 
-        $patterns = [
-            'upper'     => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-            'lower'     => 'abcdefghijklmnopqrstuvwxyz',
-            'numeric'   => '0123456789',
-            'hex'       => '0123456789abcdef',
-            'distinct'  =>  '2345679abdeghqrtACDEFHJKLMNPRSTUVWXYZ',
-            'symbol'    =>  '!@#$%^&*()[]{};:,.<>/?|=+-_`~'
-        ];
-
-        $types = is_array($type) ? $type : [$type];
-
         // Add the characters for each of our types.
-        foreach ($types as $type)
+        foreach ($patterns as $pattern)
         {
-            $pool .= $patterns[$type];
+            if (isset($this->config['random']['patterns'][$pattern]))
+            {
+                $pool .= $this->config['random']['patterns'][$pattern];
+            }
+            else
+            {
+                $pool .= $pattern;
+            }
+
         }
 
-        // Split our string into an array
-        $pool =  str_split($pool, 1);
+        // Split our string into an unique array
+        $pool =  array_unique(str_split($pool, 1));
 
         // Largest pool key
         $max = count($pool) - 1;
@@ -105,17 +115,15 @@ class Strings extends \Stringy\Stringy
 
 
     /**
-     * Replaces the given words with a string. The second argument must be
-     * an array of words and the third argument is the character to use to
+     * Replaces the given words with a string. The first argument must be
+     * an array of words and the second argument is the character to use to
      * replace the letters of the naughty word.
      *
-     * @todo move patterns to config
-     *
-     * @param $badwords
-     * @param $replacement
-     * @param $partical
+     * @param   array $words Words to replace
+     * @param   string $replacement array of bad words to censor
+     * @param   boolean $partial Replace words across word boundaries (space, period, etc)
      */
-    public function censor ($badwords, $replacement, $partical)
+    public function censor ($words, $replacement, $partial)
     {
 
     }
@@ -146,11 +154,30 @@ class Strings extends \Stringy\Stringy
 
     /**
      * Finds the intersecting word between a set of words.
-     * @param $words
+     *
+     * @param array $words Words to find similar text of
+     *
+     * @return static
      */
-    public function similar($words)
+    public function similar(array $words)
     {
+        // First word is the word to match against
+        $word = $this->str;
 
+        for ($i = 0, $max = $this->length(); $i < $max; ++$i)
+        {
+            foreach ($words as $w)
+            {
+                // Once a difference is found, break out of the loops
+                if (!isset($w[$i]) OR $w[$i] !== $word[$i])
+                {
+                    break 2;
+                }
+            }
+        }
+
+        // Return the similar text
+        return $this->substr(0, $i);
     }
 
 
@@ -197,6 +224,4 @@ class Strings extends \Stringy\Stringy
 
     public function decode() {}
     // capital to word
-    // bytes
-    //
 }
