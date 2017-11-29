@@ -13,7 +13,14 @@
 class Strings extends \Stringy\Stringy
 {
 
-    public static function helper($string)
+    private $config = [
+        'censor.badwords' => '',
+        'truncate.substring' => '',
+        'random.type' => 'distinct',
+    ];
+
+
+    public static function helper($string, $config = [])
     {
         return self::create($string);
     }
@@ -24,41 +31,75 @@ class Strings extends \Stringy\Stringy
      * is an end character (it is preferred to use a numeric html entity for special
      * characters); the default ending character is the ellipsis: "...".
      *
-     * @param        $limit
-     * @param string $endChars
-     */
-    public function limitWords($limit, $endChars = '...')
-    {
-
-    }
-
-
-    /**
-     * Limits a phrase to a given number of characters. The third argument
-     * is an end character (it is preferred to use a numeric html entity for special
-     * characters); the default ending character is the ellipsis: "...".
+     * @param        $length
+     * @param string $substring
      *
-     * Setting the fourth argument to (bool) TRUE will preserve words (if you want to
-     * limit *per* word, use limit_words() as both methods use different algorithms).
-     *
-     * @param int  $limit
-     * @param null $endChars
-     * @param bool $preserve
+     * @return static
      */
-    public function limitChars($limit = 100, $endChars = null, $preserve = false)
+    public function truncateWords($length, $substring = '..')
     {
+        $stringy = static::create($this->str, $this->encoding);
 
+        if (!$length || $length >= $stringy->length()) {
+            return $stringy;
+        }
+
+        // Match the word limit.
+        preg_match('/^\s*+(?:\S++\s*+){1,'.$length.'}/u', $stringy->str, $truncated);
+
+        if (isset($truncated[0]))
+        {
+            // Only attach the end character if the matched string is shorter than the starting string.
+            $stringy->str = rtrim($truncated[0]).((strlen($truncated[0]) === $stringy->length()) ? '' : $substring);
+        }
+
+        return $stringy;
     }
-
 
     /**
      * Generates a random string of a given type and length.
      *
-     * @param string $type
      * @param int    $length
+     * @param string $type
+     * @return static Object with its $str being random
+     * @todo move patterns to config
      */
-    public function random($type = 'alpha', $length = 8)
+    public function random($length = 8, $type = 'distinct')
     {
+        $pool = '';
+
+        $patterns = [
+            'upper'     => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+            'lower'     => 'abcdefghijklmnopqrstuvwxyz',
+            'numeric'   => '0123456789',
+            'hex'       => '0123456789abcdef',
+            'distinct'  =>  '2345679abdeghqrtACDEFHJKLMNPRSTUVWXYZ',
+            'symbol'    =>  '!@#$%^&*()[]{};:,.<>/?|=+-_`~'
+        ];
+
+        $types = is_array($type) ? $type : [$type];
+
+        // Add the characters for each of our types.
+        foreach ($types as $type)
+        {
+            $pool .= $patterns[$type];
+        }
+
+        // Split our string into an array
+        $pool =  str_split($pool, 1);
+
+        // Largest pool key
+        $max = count($pool) - 1;
+
+
+        $str = '';
+        for ($i = 0; $i < $length; $i++)
+        {
+            // Select a random character from the pool and add it to the string
+            $str .= $pool[mt_rand(0, $max)];
+        }
+
+        return static::create($str, $this->encoding);
 
     }
 
@@ -67,6 +108,8 @@ class Strings extends \Stringy\Stringy
      * Replaces the given words with a string. The second argument must be
      * an array of words and the third argument is the character to use to
      * replace the letters of the naughty word.
+     *
+     * @todo move patterns to config
      *
      * @param $badwords
      * @param $replacement
@@ -127,7 +170,8 @@ class Strings extends \Stringy\Stringy
      */
     public function reduceSlashes()
     {
-
+        $str = preg_replace('#(?<!:)//+#', '/', $this->str);
+        return static::create($str, $this->encoding);
     }
 
 
@@ -135,11 +179,21 @@ class Strings extends \Stringy\Stringy
      * Converts a file size number to a byte value. File sizes are defined in
      * the format: SB, where S is the size (1, 8.5, 300, etc.) and B is the
      * byte unit (K, MiB, GB, etc.). All valid byte units are defined in
+     *
+     * @param   string  $force a definitive unit
+     * @param   string  $format     the return string format
+     * @param   boolean $si         whether to use SI prefixes or IEC
+     * @return string
      */
-    public function bytes() {}
+    public function toBytes()
+    {
+    }
 
 
-    public function encode() {}
+    public function encode()
+    {
+
+    }
 
     public function decode() {}
     // capital to word
