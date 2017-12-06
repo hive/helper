@@ -75,6 +75,7 @@ class Strings extends \Stringy\Stringy
      *
      * @param int    $length
      * @param array $patterns
+     *
      * @return static Object with its $str being random
      */
     public function random($length = 8, $patterns = ['distinct'])
