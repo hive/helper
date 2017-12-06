@@ -1,5 +1,5 @@
 {
-  "name": "hive/Helper",
+  "name": "hive/helper",
   "description": "Hive Decoupled Helper Library",
   "keywords": [
     "mvc", "router",  "hive", "wax", "library", "helper"
