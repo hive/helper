@@ -215,6 +215,8 @@ class Strings extends \Stringy\Stringy
      */
     public function toBytes()
     {
+
+
         throw new Exception\InDevelopment(__FUNCTION__);
     }
 

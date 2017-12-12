@@ -13,6 +13,11 @@
 class Dates
 {
 
+    public static function helper($string)
+    {
+        return self::create($string);
+    }
+
     /**
      * Returns the offset (in seconds) between two time zones.
      * List of [supported timezones](http://php.net/timezones).
