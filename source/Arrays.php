@@ -27,7 +27,7 @@ class Arrays extends \Arrayzy\ArrayImitator
      */
     public function createFromCallback($string)
     {
-
+        throw new Exception\InDevelopment(__FUNCTION__);
     }
 
 
@@ -37,7 +37,7 @@ class Arrays extends \Arrayzy\ArrayImitator
      */
     public function pluck  ($key)
     {
-
+        throw new Exception\InDevelopment(__FUNCTION__);
     }
 
 
@@ -46,7 +46,7 @@ class Arrays extends \Arrayzy\ArrayImitator
      */
     public function flatten()
     {
-
+        throw new Exception\InDevelopment(__FUNCTION__);
     }
 
 
@@ -56,7 +56,7 @@ class Arrays extends \Arrayzy\ArrayImitator
      */
     public function rotate()
     {
-
+        throw new Exception\InDevelopment(__FUNCTION__);
     }
 
 
@@ -66,7 +66,7 @@ class Arrays extends \Arrayzy\ArrayImitator
      */
     public function remove($key)
     {
-
+        throw new Exception\InDevelopment(__FUNCTION__);
     }
 
 
@@ -78,7 +78,7 @@ class Arrays extends \Arrayzy\ArrayImitator
      */
     public function extract ($keys)
     {
-
+        throw new Exception\InDevelopment(__FUNCTION__);
     }
 
 
@@ -89,7 +89,7 @@ class Arrays extends \Arrayzy\ArrayImitator
      */
     public function get($key, $default = null)
     {
-
+        throw new Exception\InDevelopment(__FUNCTION__);
     }
 
 
@@ -104,7 +104,7 @@ class Arrays extends \Arrayzy\ArrayImitator
      */
     public function recursiveMap ($callback)
     {
-
+        throw new Exception\InDevelopment(__FUNCTION__);
     }
 
 
@@ -114,7 +114,7 @@ class Arrays extends \Arrayzy\ArrayImitator
      */
     public function overwrite ()
     {
-
+        throw new Exception\InDevelopment(__FUNCTION__);
     }
 
 
@@ -123,7 +123,7 @@ class Arrays extends \Arrayzy\ArrayImitator
      */
     public function toObject($class = 'stdClass')
     {
-
+        throw new Exception\InDevelopment(__FUNCTION__);
     }
 
 
@@ -135,11 +135,12 @@ class Arrays extends \Arrayzy\ArrayImitator
      */
     public function toCsv($header = true)
     {
-
+        throw new Exception\InDevelopment(__FUNCTION__);
     }
 
     public function toQueryString()
     {
+        throw new Exception\InDevelopment(__FUNCTION__);
         //http_build_query
     }
 
@@ -166,7 +167,7 @@ class Arrays extends \Arrayzy\ArrayImitator
 
     public function __invoke()
     {
-        return 'tes';
+        //throw new Exception\InDevelopment(__FUNCTION__);
     }
 
 }

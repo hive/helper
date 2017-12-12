@@ -17,33 +17,47 @@ class Dates
      * Returns the offset (in seconds) between two time zones.
      * List of [supported timezones](http://php.net/timezones).
      */
-   public function offset() {}
+   public function offset()
+   {
+       throw new Exception\InDevelopment(__FUNCTION__);
+   }
 
 
     /**
      * Returns whether a time is in AM, based on a given hour.
      */
-   public function isAm () {}
+   public function isAm ()
+   {
+       throw new Exception\InDevelopment(__FUNCTION__);
+   }
+
 
 
 
    public function days()
    {
        // cal_days_in_month
+       throw new Exception\InDevelopment(__FUNCTION__);
    }
 
 
     /**
      * Returns time difference between two timestamps, as an associative array.
      */
-   public function toSpanArray () {}
+   public function toSpanArray ()
+   {
+       throw new Exception\InDevelopment(__FUNCTION__);
+   }
 
 
     /**
      * Returns time difference between two timestamps, in the format:
      * N year, N months, N weeks, N days, N hours, N minutes, and N seconds ago
      */
-    public function toSpanString () {}
+    public function toSpanString ()
+    {
+        throw new Exception\InDevelopment(__FUNCTION__);
+    }
 
 
     /**
@@ -52,7 +66,10 @@ class Dates
      *
      *
      */
-    public function toSpanFuzzyString() {}
+    public function toSpanFuzzyString()
+    {
+        throw new Exception\InDevelopment(__FUNCTION__);
+    }
 
 
     /**
@@ -60,10 +77,14 @@ class Dates
      * N year, N months, N weeks, N days, N hours, N minutes, and N seconds ago
      * limited to the number of items in the depth
      */
-    public function toSpanStringConcise() {}
+    public function toSpanStringConcise()
+    {
+        throw new Exception\InDevelopment(__FUNCTION__);
+    }
 
     public function format($type = 'human')
     {
+        throw new Exception\InDevelopment(__FUNCTION__);
         //standard
         // html
         // short
@@ -76,8 +97,14 @@ class Dates
         // sql
     }
 
-    public function fromNet() {}
-    public function fromDos() {}
+    public function fromNet()
+    {
+        throw new Exception\InDevelopment(__FUNCTION__);
+    }
+    public function fromDos()
+    {
+        throw new Exception\InDevelopment(__FUNCTION__);
+    }
 
 
 }

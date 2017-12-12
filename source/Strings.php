@@ -126,7 +126,7 @@ class Strings extends \Stringy\Stringy
      */
     public function censor ($words, $replacement, $partial)
     {
-
+        throw new Exception\InDevelopment(__FUNCTION__);
     }
 
 
@@ -137,7 +137,7 @@ class Strings extends \Stringy\Stringy
      */
     public function p($br = true)
     {
-
+        throw new Exception\InDevelopment(__FUNCTION__);
     }
 
 
@@ -149,7 +149,7 @@ class Strings extends \Stringy\Stringy
      */
     public function distance($string)
     {
-
+        throw new Exception\InDevelopment(__FUNCTION__);
     }
 
 
@@ -189,7 +189,7 @@ class Strings extends \Stringy\Stringy
      */
     public function entropy()
     {
-
+        throw new Exception\InDevelopment(__FUNCTION__);
     }
 
 
@@ -215,14 +215,18 @@ class Strings extends \Stringy\Stringy
      */
     public function toBytes()
     {
+        throw new Exception\InDevelopment(__FUNCTION__);
     }
 
 
     public function encode()
     {
-
+        throw new Exception\InDevelopment(__FUNCTION__);
     }
 
-    public function decode() {}
+    public function decode()
+    {
+        throw new Exception\InDevelopment(__FUNCTION__);
+    }
     // capital to word
 }
