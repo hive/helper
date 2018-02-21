@@ -13,11 +13,24 @@
 class Arrays extends \Arrayzy\ArrayImitator
 {
 
+    const DEFAULT_SEPARATOR = 'ASDASD';
+
+
     public static function helper($string)
     {
         return self::create($string);
     }
 
+
+    public function isEmpty ($value)
+    {
+        return isset($this->elements[$value]) && !empty($this->elements[$value]);
+    }
+
+    public function notEmpty($value)
+    {
+        return !$this->isEmpty($value);
+    }
 
 
     /**
