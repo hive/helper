@@ -13,6 +13,9 @@
 class Arrays extends \Arrayzy\ArrayImitator
 {
 
+    const DEFAULT_SEPARATOR = 'ASDASD';
+
+
     public static function helper($string)
     {
         return self::create($string);
@@ -22,6 +25,17 @@ class Arrays extends \Arrayzy\ArrayImitator
     {
         return new static(array_keys($this->elements));
     }
+
+    public function isEmpty ($value)
+    {
+        return isset($this->elements[$value]) && !empty($this->elements[$value]);
+    }
+
+    public function notEmpty($value)
+    {
+        return !$this->isEmpty($value);
+    }
+
 
     /**
      * Return a callback array from a string, eg: limit[10,20] would become
