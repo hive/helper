@@ -18,7 +18,10 @@ class Arrays extends \Arrayzy\ArrayImitator
         return self::create($string);
     }
 
-
+    public function keys()
+    {
+        return new static(array_keys($this->elements));
+    }
 
     /**
      * Return a callback array from a string, eg: limit[10,20] would become
